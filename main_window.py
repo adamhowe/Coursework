@@ -3,17 +3,26 @@ import sys
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 
+from client_window import *
+
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__() #super class constructor
         self.setWindowTitle("Stock Control System")
         self.create_layout()
 
-        self.grid_layout = QGridLayout()
-        self.grid_layout.addWidget(self.select_widget)
+        #self.grid_layout = QGridLayout()
+        #self.grid_layout.addWidget(self.select_widget)
+
+        #self.central_widget = QWidget()
+        #self.central_widget.setLayout(self.grid_layout)
+        #self.setCentralWidget(self.central_widget)
+
+        self.stacked_layout = QStackedLayout()
+        self.stacked_layout.addWidget(self.select_widget)
 
         self.central_widget = QWidget()
-        self.central_widget.setLayout(self.grid_layout)
+        self.central_widget.setLayout(self.stacked_layout)
         self.setCentralWidget(self.central_widget)
 
     def create_layout(self):
@@ -42,34 +51,42 @@ class MainWindow(QMainWindow):
         self.password_button.clicked.connect(self.change_password)
 
     def create_client_layout(self):
+        #second layout
         self.view_button = QPushButton("View Full Database")
         self.search_button = QPushButton("Search")
         self.edit_button = QPushButton("Edit An Entry")
 
-        #self.
+        self.search_line_edit = QLineEdit()
+        self.edit_line_edit = QLineEdit()
 
-        self.view_client_widget = QWidget()
-        #self.view_client_widget.setLayout()
-
-
-    def client(self):
-        print("yay")
-        self.create_client_layout()
-        self.grid_layout.addWidget(self.view_client_widget)
-        self.grid_layout.setCurrentIndex(1)
+        self.initial_client_layout = QGridLayout()
+        self.initial_client_layout.addWidget(self.view_button,0,1)
+        self.initial_client_layout.addWidget(self.search_button,1,0)
+        self.initial_client_layout.addWidget(self.edit_button,2,0)
+        self.initial_client_layout.addWidget(self.search_line_edit,1,1)
+        self.initial_client_layout.addWidget(self.edit_line_edit,2,1)
         
+                                             
+        self.view_client_widget = QWidget()
+        self.view_client_widget.setLayout(self.initial_client_layout)
+        
+    def client(self):
+        print("got here")
+        self.create_client_layout()
+        self.stacked_layout.addWidget(self.view_client_widget)
+        self.stacked_layout.setCurrentIndex(1)   
  
     def jobs_layout(self):
-        pass
+        print("got here")
 
     def add_entry(self):
-        pass
+        print("got here")
 
     def delete_entry(self):
-        pass
+        print("got here")
 
     def change_password(self):
-        pass
+        print("got here")
        
 def main():
     system = QApplication(sys.argv) #create application
